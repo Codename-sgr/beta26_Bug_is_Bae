@@ -8,8 +8,6 @@
 
     <include layout="@layout/toolbar"/>
 
-
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -43,7 +41,7 @@
                     android:text="Ready To Be a Donor" />
 
                 <ToggleButton
-                    android:id="@+id/simpleToggleButton"
+                    android:id="@+id/toggleButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -68,7 +66,7 @@
                     android:text="@string/username" />
 
                 <EditText
-                    android:id="@+id/accUserName"
+                    android:id="@+id/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
@@ -92,14 +90,14 @@
                     android:text="@string/mobile_number" />
 
                 <EditText
-                    android:id="@+id/accMobile"
+                    android:id="@+id/mobile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorPrimaryDark"
-                    android:enabled="false"
-                    android:inputType="phone" />
+                    android:enabled="true"
+                    android:inputType="number" />
             </LinearLayout>
 
             <LinearLayout
@@ -116,7 +114,7 @@
                     android:text="@string/Email" />
 
                 <EditText
-                    android:id="@+id/accEmail"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
@@ -140,7 +138,7 @@
                     android:text="@string/address" />
 
                 <EditText
-                    android:id="@+id/accAddress"
+                    android:id="@+id/address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -169,6 +167,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
                     android:enabled="true"
+                    android:hint="in cm"
+                    android:textColorHint="#403C3C"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
                     android:inputType="number" />
@@ -193,6 +193,8 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
                     android:enabled="true"
+                    android:hint="in kg"
+                    android:textColorHint="#403C3C"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
                     android:inputType="number" />
@@ -222,6 +224,12 @@
                     android:inputType="number" />
             </LinearLayout>
 
+            <View
+                android:layout_marginTop="20dp"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#777767" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -229,22 +237,55 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:text="@string/bloodGrp" />
 
-                <EditText
-                    android:id="@+id/bloodGrp"
-                    android:layout_width="match_parent"
+                <RadioGroup
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:enabled="true"
-                    android:gravity="center_vertical"
                     android:layout_weight="1"
-                    android:inputType="none" />
+                    android:id="@+id/bloodRadBtn">
+
+                    <RadioButton
+                        android:id="@+id/aBlood"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="A"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/bBlood"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="B"
+                        android:checked="false"
+                        android:textSize="16dp" />
+                    <RadioButton
+                        android:id="@+id/oBlood"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="O"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/abBlood"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="AB"
+                        android:checked="false"
+                        android:textSize="16dp" />
+                </RadioGroup>
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#777767" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -253,13 +294,49 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:text="@string/pastDiseases" />
 
-                <EditText
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <CheckBox android:id="@+id/dis1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jaundice" />
+                    <CheckBox android:id="@+id/dis2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cardiac" />
+                    <CheckBox android:id="@+id/dis3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TB" />
+                    <CheckBox android:id="@+id/dis4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tumor" />
+                    <CheckBox android:id="@+id/dis5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Anemia" />
+                    <CheckBox android:id="@+id/dis6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Diabetes" />
+                    <CheckBox android:id="@+id/dis7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="BP" />
+                </LinearLayout>
+
+                <!--<EditText
                     android:id="@+id/pastDiseases"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -269,8 +346,14 @@
                     android:textColorHint="#403C3C"
                     android:gravity="center_vertical"
                     android:layout_weight="1"
-                    android:inputType="textMultiLine" />
+                    android:inputType="textMultiLine" />-->
+
             </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#777767" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -452,10 +535,47 @@
                     android:inputType="numberSigned" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:text="Upload Aadhar Card" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="ChooseImage"
+                    android:text="Choose File"
+                    android:textSize="10sp"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/aadharCardImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="30dp"
+                    android:contentDescription="Aadhar Card" />
+            </LinearLayout>
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Update"
+                android:onClick="Update"
                 android:padding="10dp"
                 android:layout_gravity="center"
                 android:layout_marginVertical="30dp"/>

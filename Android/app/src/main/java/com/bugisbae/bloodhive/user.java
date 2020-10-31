@@ -16,6 +16,49 @@ public class user {
     int alcoholLevel;
     int smokingLevel;
     int haemoglobin;
+    boolean sportsAndGym;
+    int sleepLevel;
+    int heartRate;
+    String address;
+    boolean activeDonor=false;
+
+
+
+    public user(String user_id, String user_name, String email) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.email = email;
+
+    }
+
+    public user(String user_id, String user_name, String email, String mobile, String address) {
+        this.user_id = user_id;
+        this.user_name = user_name;
+        this.email = email;
+        this.mobile = mobile;
+        this.address = address;
+    }
+
+    public user(String user_id, String user_name, String email,String mobile,String address,int weight, int height, int age, String bloodGroup, ArrayList<String> pastDiseases, boolean tatoos, int alcoholLevel, int smokingLevel, int haemoglobin, boolean sportsAndGym, int sleepLevel, int heartRate,boolean activeDonor) {
+        this.user_id=user_id;
+        this.user_name=user_name;
+        this.email=email;
+        this.mobile=mobile;
+        this.address=address;
+        this.weight = weight;
+        this.height = height;
+        this.age = age;
+        this.BloodGroup = bloodGroup;
+        this.pastDiseases = pastDiseases;
+        this.tatoos = tatoos;
+        this.alcoholLevel = alcoholLevel;
+        this.smokingLevel = smokingLevel;
+        this.haemoglobin = haemoglobin;
+        this.sportsAndGym = sportsAndGym;
+        this.sleepLevel = sleepLevel;
+        this.heartRate = heartRate;
+        this.activeDonor=activeDonor;
+    }
 
     public int getWeight() {
         return weight;
@@ -113,52 +156,18 @@ public class user {
         this.heartRate = heartRate;
     }
 
-    public ArrayList<String> getPhobia() {
-        return phobia;
+
+
+
+
+    public boolean isActiveDonor() {
+        return activeDonor;
     }
 
-    public void setPhobia(ArrayList<String> phobia) {
-        this.phobia = phobia;
+    public void setActiveDonor(boolean activeDonor) {
+        this.activeDonor = activeDonor;
     }
 
-    public user(int weight, int height, int age, String bloodGroup, ArrayList<String> pastDiseases, boolean tatoos, int alcoholLevel, int smokingLevel, int haemoglobin, boolean sportsAndGym, int sleepLevel, int heartRate, ArrayList<String> phobia) {
-        this.weight = weight;
-        this.height = height;
-        this.age = age;
-        BloodGroup = bloodGroup;
-        this.pastDiseases = pastDiseases;
-        this.tatoos = tatoos;
-        this.alcoholLevel = alcoholLevel;
-        this.smokingLevel = smokingLevel;
-        this.haemoglobin = haemoglobin;
-        this.sportsAndGym = sportsAndGym;
-        this.sleepLevel = sleepLevel;
-        this.heartRate = heartRate;
-        this.phobia = phobia;
-    }
-
-    boolean sportsAndGym;
-    int sleepLevel;
-    int heartRate;
-    ArrayList<String> phobia;
-
-
-    String address;
-
-    public user(String user_id, String user_name, String email) {
-        this.user_id = user_id;
-        this.user_name = user_name;
-        this.email = email;
-
-    }
-
-    public user(String user_id, String user_name, String email, String mobile, String address) {
-        this.user_id = user_id;
-        this.user_name = user_name;
-        this.email = email;
-        this.mobile = mobile;
-        this.address = address;
-    }
 
     public String getUser_id() {
         return user_id;

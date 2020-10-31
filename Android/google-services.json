@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "249615519912",
+    "firebase_url": "https://bloodhive-27308.firebaseio.com",
+    "project_id": "bloodhive-27308",
+    "storage_bucket": "bloodhive-27308.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249615519912:android:984b7eff37588af0fa329d",
+        "android_client_info": {
+          "package_name": "com.bugisbae.bloodhive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249615519912-k7onpkg1hjghdb89g7j2f11q9a5ps0hd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLfkyiedFDDjDTp-qvhf3FmdEiBLNfQbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "249615519912-k7onpkg1hjghdb89g7j2f11q9a5ps0hd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

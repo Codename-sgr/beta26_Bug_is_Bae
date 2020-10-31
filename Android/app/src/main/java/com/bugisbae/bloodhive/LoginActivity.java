@@ -1,8 +1,5 @@
 package com.bugisbae.bloodhive;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,10 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -42,34 +41,32 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     LoadingDialog loadingDialog;
     SignInButton googleLoginBtn;
     FirebaseUser user;
     TextInputEditText email;
     TextInputEditText password;
     Button LogIn;
-    TextView signUp,forgetPwd;
-    Boolean isValid=false;
+    TextView signUp, forgetPwd;
+    Boolean isValid = false;
 
-    private int RC_SIGN_IN=100;
+    private int RC_SIGN_IN = 100;
     DatabaseReference databaseUsers;
     GoogleSignInClient mGoogleSignInClient;
 
-    public void logIn(View view){
-        String uemail=email.getText().toString().trim();
-        String upassword=password.getText().toString().trim();
+    public void logIn(View view) {
+        String uemail = email.getText().toString().trim();
+        String upassword = password.getText().toString().trim();
 
-        if(!Patterns.EMAIL_ADDRESS.matcher(uemail).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(uemail).matches()) {
             email.setError("Invalid Email");
             email.setFocusable(true);
-        }
-        else if(upassword.isEmpty()){
+        } else if (upassword.isEmpty()) {
             password.setError("Enter Your Password");
             password.setFocusable(true);
-        }
-        else{
-            logUserIn(uemail,upassword);
+        } else {
+            logUserIn(uemail, upassword);
         }
 
     }
@@ -80,17 +77,15 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnSuccessListener(this, new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        user=mAuth.getCurrentUser();
+                        user = mAuth.getCurrentUser();
                         loadingDialog.dismissDialog();
                         try {
-                            if(user.isEmailVerified()){
-                                isValid=true;
+                            if (user.isEmailVerified()) {
+                                isValid = true;
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 finish();
-                            }
-                            else
-                            {
-                                final androidx.appcompat.app.AlertDialog.Builder builder=new androidx.appcompat.app.AlertDialog.Builder(LoginActivity.this);
+                            } else {
+                                final androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(LoginActivity.this);
                                 builder.setTitle("Error");
                                 builder
                                         .setMessage("Your Email ID is not Verified !")
@@ -103,12 +98,12 @@ public class LoginActivity extends AppCompatActivity {
                                             }
                                         });
 
-                                androidx.appcompat.app.AlertDialog dialog=builder.create();
+                                androidx.appcompat.app.AlertDialog dialog = builder.create();
                                 dialog.show();
                             }
-                        }catch (NullPointerException e){
+                        } catch (NullPointerException e) {
                             loadingDialog.dismissDialog();
-                            Log.i("Info",""+e.getMessage());
+                            Log.i("Info", "" + e.getMessage());
 
                         }
                     }
@@ -116,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 loadingDialog.dismissDialog();
-                Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -130,31 +125,31 @@ public class LoginActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.i("TAG","Failed"+e.getMessage());
+                Log.i("TAG", "Failed" + e.getMessage());
             }
         });
     }
 
     private void showPwdRecoveryDialog() {
 
-        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Password Recovery");
 
-        LinearLayout linearLayout=new LinearLayout(this);
-        final EditText emailET=new EditText(this);
+        LinearLayout linearLayout = new LinearLayout(this);
+        final EditText emailET = new EditText(this);
         emailET.setHint("Email");
         emailET.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         emailET.setMinEms(16);
 
         linearLayout.addView(emailET);
-        linearLayout.setPadding(10,10,10,10);
+        linearLayout.setPadding(10, 10, 10, 10);
         builder.setView(linearLayout);
 
         builder.setPositiveButton("Recover", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                String email=emailET.getText().toString().trim();
+                String email = emailET.getText().toString().trim();
                 beginRecovery(email);
 
             }
@@ -178,35 +173,32 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         loadingDialog.dismissDialog();
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Email Sent", Toast.LENGTH_SHORT).show();
-                        }
-                        else
+                        } else
                             Toast.makeText(LoginActivity.this, "Failed..", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 loadingDialog.dismissDialog();
-                Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void checkUserStatus(){
-        if (user!=null && user.isEmailVerified())
-        {
+    private void checkUserStatus() {
+        if (user != null && user.isEmailVerified()) {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         }
     }
 
 
-
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
-        user=mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
         // Check if user is signed in (non-null) and update UI accordingly.
         checkUserStatus();
     }
@@ -216,29 +208,29 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if (getSupportActionBar()!=null)
+        if (getSupportActionBar() != null)
             getSupportActionBar().hide();
 
-        databaseUsers= FirebaseDatabase.getInstance().getReference().child("Manit").child("Users");
+        databaseUsers = FirebaseDatabase.getInstance().getReference().child("Manit").child("Users");
 
 
         // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        /*GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSignInClient= GoogleSignIn.getClient(this,gso);
+        mGoogleSignInClient= GoogleSignIn.getClient(this,gso);*/
 
 
-        mAuth=FirebaseAuth.getInstance();
-        user=mAuth.getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
-        email=findViewById(R.id.editTextEmail);
-        password=findViewById(R.id.password);
-        LogIn=findViewById(R.id.LogIn);
-        signUp=findViewById(R.id.signUp);
-        forgetPwd=findViewById(R.id.textViewForgetPass);
-        googleLoginBtn=findViewById(R.id.googleLoginBtn);
+        email = findViewById(R.id.editTextEmail);
+        password = findViewById(R.id.password);
+        LogIn = findViewById(R.id.LogIn);
+        signUp = findViewById(R.id.signUp);
+        forgetPwd = findViewById(R.id.textViewForgetPass);
+        googleLoginBtn = findViewById(R.id.googleLoginBtn);
         forgetPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -255,8 +247,8 @@ public class LoginActivity extends AppCompatActivity {
         password.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode==KeyEvent.KEYCODE_ENTER && isValid)
-                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                if (keyCode == KeyEvent.KEYCODE_ENTER && isValid)
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 return false;
             }
         });
@@ -290,7 +282,7 @@ public class LoginActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed
-                Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -309,18 +301,17 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success
 
-                            isValid=true;
+                            isValid = true;
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(LoginActivity.this, ""+user.getDisplayName()+"\n"+user.getEmail() , Toast.LENGTH_SHORT).show();
-                            final String Uid=user.getUid();
+                            Toast.makeText(LoginActivity.this, "" + user.getDisplayName() + "\n" + user.getEmail(), Toast.LENGTH_SHORT).show();
+                            final String Uid = user.getUid();
                             databaseUsers.child(Uid).child("email").setValue(user.getEmail());
                             databaseUsers.child(Uid).child("user_id").setValue(user.getUid());
                             databaseUsers.child(Uid).child("user_name").setValue(user.getDisplayName());
                             databaseUsers.child(Uid).child("dp").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    if(!dataSnapshot.exists())
-                                    {
+                                    if (!dataSnapshot.exists()) {
                                         databaseUsers.child(Uid).child("dp").setValue(false);
                                     }
                                 }
@@ -331,7 +322,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
 
-                            Intent i=new Intent(getApplicationContext(),MainActivity.class);
+                            Intent i = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(i);
                             finish();
 
@@ -345,7 +336,7 @@ public class LoginActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(LoginActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

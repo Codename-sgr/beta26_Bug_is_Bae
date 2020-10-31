@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 public class LoadingDialog {
     public Activity activity;
     public AlertDialog alertDialog;
+    String message;
 
     public LoadingDialog(Activity activity){
         this.activity=activity;
@@ -28,4 +29,7 @@ public class LoadingDialog {
         alertDialog.dismiss();
     }
 
+    public void message(String s) {
+        alertDialog.setMessage(message);
+    }
 }

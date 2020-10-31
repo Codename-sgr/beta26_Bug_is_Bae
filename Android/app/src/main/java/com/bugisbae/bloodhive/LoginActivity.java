@@ -307,7 +307,7 @@ public class LoginActivity extends AppCompatActivity {
                             final String Uid = user.getUid();
                             databaseUsers.child(Uid).child("email").setValue(user.getEmail());
                             databaseUsers.child(Uid).child("user_id").setValue(user.getUid());
-                            databaseUsers.child(Uid).child("user_name").setValue(user.getDisplayName());
+                            databaseUsers.child(Uid).child("username").setValue(user.getDisplayName());
                             databaseUsers.child(Uid).child("dp").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

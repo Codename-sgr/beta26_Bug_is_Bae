@@ -5,4 +5,12 @@
     <string name="signup_form">SignUp Form</string>
     <string name="name">Name</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="username">Username</string>
+    <string name="mobile_number">Mobile</string>
+    <string name="address">Address</string>
+    <string name="Height">Height</string>
+    <string name="Weight">Weight</string>
+    <string name="age">Age</string>
+    <string name="bloodGrp">Blood Group</string>
+    <string name="pastDiseases">Past Major Diseases</string>
 </resources>

@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
@@ -10,7 +9,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -60,3 +59,4 @@ dependencies {
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }
+apply plugin: 'com.google.gms.google-services'

@@ -41,7 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     LoadingDialog loadingDialog;
     SignInButton googleLoginBtn;
     FirebaseUser user;

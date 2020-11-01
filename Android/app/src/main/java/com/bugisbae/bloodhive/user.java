@@ -21,6 +21,16 @@ public class user {
     int sleepLevel;
     boolean isOK=true;
     float qualityIndex=100;
+    String imgUrl;
+
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public float getQualityIndex() {
         return qualityIndex;
@@ -80,7 +90,7 @@ public class user {
         this.longAdd=longAdd;
     }
 
-    public user(String user_id, String user_name,String gender, String email,String mobile, String latAdd,String longAdd,int weight, int height, int age, String bloodGroup, ArrayList<String> pastDiseases, boolean tatoos, int alcoholLevel, int smokingLevel, int haemoglobin, boolean sportsAndGym, int sleepLevel, int heartRate,boolean activeDonor) {
+    public user(String user_id, String user_name,String gender, String email,String mobile, String latAdd,String longAdd,int weight, int height, int age, String bloodGroup, ArrayList<String> pastDiseases, boolean tatoos, int alcoholLevel, int smokingLevel, int haemoglobin, boolean sportsAndGym, int sleepLevel, int heartRate,boolean activeDonor,String imgUrl) {
         this.user_id=user_id;
         this.user_name=user_name;
         this.email=email;
@@ -101,6 +111,7 @@ public class user {
         this.sleepLevel = sleepLevel;
         this.heartRate = heartRate;
         this.activeDonor=activeDonor;
+        this.imgUrl=imgUrl;
     }
 
     public String getGender() {

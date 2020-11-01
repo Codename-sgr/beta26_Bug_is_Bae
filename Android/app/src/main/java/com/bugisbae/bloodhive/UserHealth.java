@@ -18,6 +18,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Log;
@@ -52,7 +53,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 import static androidx.constraintlayout.motion.widget.Debug.getLocation;
@@ -63,7 +68,7 @@ public class UserHealth extends AppCompatActivity {
     LoadingDialog loadingDialog;
     EditText usernameTF, mobileTF, emailTF, heightTF, weightTF, ageTF, tatoosTF, alcoholLevelTF, smokingLevelTF, haemoglobinTF, sportsAndGymTF, sleepingHrTF, heartRateTF;
     ToggleButton toggleButton;
-    String username, email, gender, bloodGrp, mobile;
+    String username, email, gender, bloodGrp, mobile,imgUrl;
     ArrayList<String> pastDiseases = new ArrayList<>();
 
     int height, weight, age, alcoholLevel, smokingLevel, haemoglobin, sleepingHr, heartRate;
@@ -272,7 +277,8 @@ public class UserHealth extends AppCompatActivity {
             Toast.makeText(this, "Upload Your Aadhar", Toast.LENGTH_SHORT).show();
         else if (!flag) {
             loadingDialog.startLoadingDialog();
-            user user = new user(user_id, username, gender, email, mobile, latAdd, longAdd, weight, height, age, bloodGrp, pastDiseases, tatoos, alcoholLevel, smokingLevel, haemoglobin, sportsAndGym, sleepingHr, heartRate, activeDonor);
+            imgUrl=uri.toString();
+            user user = new user(user_id, username, gender, email, mobile, latAdd, longAdd, weight, height, age, bloodGrp, pastDiseases, tatoos, alcoholLevel, smokingLevel, haemoglobin, sportsAndGym, sleepingHr, heartRate, activeDonor,imgUrl);
             uploadUserDetails(user);
             newuser.child("blood_group").setValue(bloodGrp);
             newuser.child("status").setValue(1);
@@ -304,11 +310,51 @@ public class UserHealth extends AppCompatActivity {
                 loadingDialog.message("Uploaded " + (int) progress + "%");
             }
         });
-        loadingDialog.dismissDialog();
+
+
+        jsonFileExtract();
+
+
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
         finish();
+    }
+
+    private void jsonFileExtract() {
+
+        String link="x="+latAdd+"&&y="+longAdd+"/"+user_id+"/"+bloodGrp;
+
+        URL url;
+        HttpURLConnection urlConnection = null;
+        try {
+            url = new URL("https://filterloc.herokuapp.com/location/x=1.009&&y=1.007/ab");
+
+            urlConnection = (HttpURLConnection) url
+                    .openConnection();
+
+            InputStream in = urlConnection.getInputStream();
+
+            InputStreamReader isw = new InputStreamReader(in);
+
+            String res="";
+            int data = isw.read();
+            while (data != -1) {
+                char current = (char) data;
+                data = isw.read();
+                res+=current;
+            }
+
+            Log.i("INFOO",res);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (urlConnection != null) {
+                urlConnection.disconnect();
+            }
+        }
+        loadingDialog.dismissDialog();
+
     }
 
     public void ChooseImage(View view) {
@@ -338,6 +384,16 @@ public class UserHealth extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_health);
+
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            //your codes here
+
+        }
 
         loadingDialog = new LoadingDialog(this);
         usernameTF = findViewById(R.id.userName);
@@ -412,6 +468,16 @@ public class UserHealth extends AppCompatActivity {
                 }
             }
         });
+
+
+
+
+
+
+
+
+
+
     }
 
     @Override

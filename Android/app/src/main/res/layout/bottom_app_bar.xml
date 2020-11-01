@@ -42,7 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|bottom"
-                    android:text="Feed"
+                    android:text="Help"
                     android:textColor="#ffffff" />
 
             </LinearLayout>
@@ -76,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|bottom"
-                    android:text="My Account"
+                    android:text="Chat"
                     android:textColor="#ffffff" />
 
             </LinearLayout>

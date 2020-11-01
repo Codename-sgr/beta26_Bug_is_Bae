@@ -13,7 +13,7 @@ idx_o = index.Index()
 locations = Location.objects.all()
 pkk = 100
 
-'''for location in locations:
+for location in locations:
     blood_group = location.group
     x, y = location.x, location.y
     dx, dy = 0.00001, 0.00001
@@ -24,7 +24,7 @@ pkk = 100
     elif (blood_group == 'ab'):
         idx_ab.insert(id, (x-dx, y - dy, x + dx, y + dy))
     else:
-        idx_o.insert(id, (x-dx, y - dy, x + dx, y + dy))'''
+        idx_o.insert(id, (x-dx, y - dy, x + dx, y + dy))
 
 '''left, bottom, right, top = (0.0, 0.0, 1.0, 1.0)
 idx_a.insert(1, (left, bottom, right, top))'''
@@ -33,7 +33,7 @@ def indexx(request, coOrdinate, blood_group):
     """
     API endpoint to return k nearest donor using r-tree in log(n+k)
     """
-    k = 2
+    k = 10
     dx, dy = 0.00001, 0.00001
     x, y = format( coOrdinate )
     if (blood_group == 'a'):
@@ -56,7 +56,7 @@ def indexx(request, coOrdinate, blood_group):
 
     return JsonResponse( {
         'status' : 200,
-        'response' : res,
+        'response' : resp,
         } )
 
 

@@ -51,6 +51,46 @@
                      />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="Gender" />
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:id="@+id/genderRadBtn">
+
+                    <RadioButton
+                        android:id="@+id/genMale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:layout_marginHorizontal="20dp"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                    <RadioButton
+                        android:id="@+id/genFemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:checked="false"
+                        android:textSize="16dp" />
+
+                </RadioGroup>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -131,14 +171,59 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/address" />
+
+                <Button
+                    android:id="@+id/getAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Get Address"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="50dp"
+                    android:gravity="center"
+                    android:textSize="10sp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="2"
-                    android:text="@string/address" />
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Lat" />
 
                 <EditText
-                    android:id="@+id/address"
+                    android:id="@+id/latAdd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:enabled="true"
+                    android:inputType="textPostalAddress" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="Long" />
+
+                <EditText
+                    android:id="@+id/longAdd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -542,10 +627,10 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="2"
+                    android:layout_weight="1"
                     android:text="Upload Aadhar Card" />
 
                 <Button
@@ -553,6 +638,10 @@
                     android:layout_height="wrap_content"
                     android:onClick="ChooseImage"
                     android:text="Choose File"
+                    android:layout_weight="2"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="50dp"
+                    android:gravity="center"
                     android:textSize="10sp"/>
 
 

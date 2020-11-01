@@ -7,6 +7,7 @@ public class user {
     String user_name;
     String email;
     String mobile;
+    String gender;
     int weight;
     int height;
     int age;
@@ -18,33 +19,75 @@ public class user {
     int haemoglobin;
     boolean sportsAndGym;
     int sleepLevel;
+    boolean isOK=true;
+    float qualityIndex=100;
+
+    public float getQualityIndex() {
+        return qualityIndex;
+    }
+
+    public void setQualityIndex(float qualityIndex) {
+        this.qualityIndex = qualityIndex;
+    }
+
+    public boolean isOK() {
+        return isOK;
+    }
+
+    public void setOK(boolean OK) {
+        isOK = OK;
+    }
+
+    public String getLatAdd() {
+        return latAdd;
+    }
+
+    public void setLatAdd(String latAdd) {
+        this.latAdd = latAdd;
+    }
+
+    public String getLongAdd() {
+        return longAdd;
+    }
+
+    public void setLongAdd(String longAdd) {
+        this.longAdd = longAdd;
+    }
+
     int heartRate;
-    String address;
+    String latAdd;
+    String longAdd;
     boolean activeDonor=false;
 
 
+    public user(){
 
-    public user(String user_id, String user_name, String email) {
+    }
+
+    user(String user_id, String user_name, String email) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.email = email;
 
     }
 
-    public user(String user_id, String user_name, String email, String mobile, String address) {
+    public user(String user_id, String user_name, String email, String mobile, String latAdd,String longAdd) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.email = email;
         this.mobile = mobile;
-        this.address = address;
+        this.latAdd = latAdd;
+        this.longAdd=longAdd;
     }
 
-    public user(String user_id, String user_name, String email,String mobile,String address,int weight, int height, int age, String bloodGroup, ArrayList<String> pastDiseases, boolean tatoos, int alcoholLevel, int smokingLevel, int haemoglobin, boolean sportsAndGym, int sleepLevel, int heartRate,boolean activeDonor) {
+    public user(String user_id, String user_name,String gender, String email,String mobile, String latAdd,String longAdd,int weight, int height, int age, String bloodGroup, ArrayList<String> pastDiseases, boolean tatoos, int alcoholLevel, int smokingLevel, int haemoglobin, boolean sportsAndGym, int sleepLevel, int heartRate,boolean activeDonor) {
         this.user_id=user_id;
         this.user_name=user_name;
         this.email=email;
+        this.gender=gender;
         this.mobile=mobile;
-        this.address=address;
+        this.latAdd = latAdd;
+        this.longAdd=longAdd;
         this.weight = weight;
         this.height = height;
         this.age = age;
@@ -58,6 +101,14 @@ public class user {
         this.sleepLevel = sleepLevel;
         this.heartRate = heartRate;
         this.activeDonor=activeDonor;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public int getWeight() {
@@ -201,11 +252,6 @@ public class user {
         this.mobile = mobile;
     }
 
-    public String getAddress() {
-        return address;
-    }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+
 }
